@@ -1,4 +1,4 @@
-name: Hello World with Variables
+name: Hello World with Variable
 
 on:
   workflow_dispatch:
