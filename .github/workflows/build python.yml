@@ -1,12 +1,7 @@
 name: Build Python
 
 on:
-  push:
-    paths:
-      - 'python/mathlib.py'
-  pull_request:
-    paths:
-      - 'python/mathlib.py'
+  workflow_dispatch:
 
 jobs:
   build:
