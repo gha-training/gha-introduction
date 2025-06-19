@@ -1,11 +1,12 @@
-## 🚀 Automated Issue
+---
+name: GitHub Actions Issue
+about: Template to demonstrate creating an issue from an Action
+title: "No issue, just awesomeness"
+labels: action
+assignees: ''
 
-**Who triggered this:** @{{ github.actor }}
+---
 
-**Event:** {{ github.event_name }}
+## Description
 
-**Workflow:** {{ github.workflow }}
-
-**Ref:** {{ github.ref }}
-
-Have a great day!
+This is a demonstration of using a GitHub Marketplace action to automatically create an issue from a GitHub Actions workflow.
