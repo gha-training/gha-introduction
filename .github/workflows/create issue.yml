@@ -8,8 +8,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: JasonEtco/create-an-issue@v2.9.2
-        with:
-          title: "No Issue, just awesomeness"
-          body: "This issue was created manually by ${{ github.actor }}."
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
