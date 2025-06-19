@@ -1,0 +1,28 @@
+name: Manual workflow inputs
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Who to greet'
+        required: false
+        default: 'world'
+      excitement:
+        description: 'Add excitement?'
+        required: false
+        default: 'true'
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say hello
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Hello, ${{ inputs.name }}!"
+            if [ "${{ inputs.excitement }}" = "true" ]; then
+              echo "🎉🎉🎉"
+            fi
+          else
+            echo "Triggered automatically. Skipping manual inputs."
+          fi
