@@ -10,6 +10,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: JasonEtco/create-an-issue@v2.9.2
         with:
-          filename: .github/issue-template.md
+          filename: .github/actions_issue_template.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
