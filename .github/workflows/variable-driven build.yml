@@ -5,6 +5,7 @@ on:
 
 env:
   NODE_VERSION: '18'
+  RUN_TESTS: 'true'  # Environment variables are always strings
 
 jobs:
   build:
@@ -24,4 +25,5 @@ jobs:
         run: echo "You're using Node 18!"
         
       - name: Run mathlib tests
+        if: env.RUN_TESTS == 'true'
         run: node javascript/test_mathlib.js
