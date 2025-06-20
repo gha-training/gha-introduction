@@ -1,0 +1,23 @@
+name: Variable-driven build
+
+on:
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Run mathlib tests
+        run: node javascript/test_mathlib.js
