@@ -11,6 +11,11 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
         python-version: [3.11.0, 3.12.0, 3.13.0]
         architecture: [x64, ARM64]
+        exclude:
+        - os: windows-latest
+          architecture: arm64
+        - os: macos-latest
+          architecture: arm64
     runs-on: ${{ matrix.os }}
 
     steps:
