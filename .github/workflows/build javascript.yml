@@ -17,4 +17,4 @@ jobs:
           node-version: '18'
 
       - name: Run mathlib tests
-        run: node test_mathlib.js
+        run: node javascript/test_mathlib.js
