@@ -18,6 +18,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-
+          
+      - name: Conditional Message
+        if: env.NODE_VERSION == '18'
+        run: echo "You're using Node 18!"
+        
       - name: Run mathlib tests
         run: node javascript/test_mathlib.js
