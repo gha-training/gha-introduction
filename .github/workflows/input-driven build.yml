@@ -1,4 +1,4 @@
-name: Input-driven workflow
+name: Input-driven build
 
 on:
   workflow_dispatch:
