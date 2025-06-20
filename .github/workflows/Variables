@@ -1,4 +1,4 @@
-name: Build Javascript
+name: Input-driven workflow
 
 on:
   workflow_dispatch:
