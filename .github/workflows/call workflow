@@ -1,0 +1,10 @@
+name: Call workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: ./.github/workflows/reusable workflow.yml
+    with:
+      node_version: '18'
