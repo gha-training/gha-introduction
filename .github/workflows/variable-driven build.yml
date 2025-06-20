@@ -5,8 +5,8 @@ on:
 
 env:
   NODE_VERSION: '18'
-  RUN_TESTS: 'false'  # Environment variables are always strings
-
+  RUN_TESTS: ${{ vars.RUN_TESTS }}
+  
 jobs:
   build:
     runs-on: ubuntu-latest
