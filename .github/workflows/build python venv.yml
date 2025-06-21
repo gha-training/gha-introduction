@@ -1,4 +1,4 @@
-name: Inefficient workflow
+name: Build Python venv
 
 on:
   workflow_dispatch:
