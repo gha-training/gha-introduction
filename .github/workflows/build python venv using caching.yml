@@ -1,4 +1,4 @@
-name: Cached workflow
+name: Build Python venv using caching
 
 on:
   workflow_dispatch:
@@ -29,7 +29,7 @@ jobs:
           if [ ! -d ".venv" ]; then
             python -m venv .venv
             source .venv/bin/activate
-            pip install -r dependencies/requirements.txt
+            pip install -r venv/requirements.txt
           else
             echo "Using cached virtual environment."
           fi
