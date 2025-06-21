@@ -11,20 +11,35 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Restore dataset from cache
+      - name: Restore data from cache
         uses: actions/cache@v4
         with:
           path: data
-          key: ${{ runner.os }}-kasandr-dataset
+          key: ${{ runner.os }}-largefiles-cache
 
-      - name: Download dataset if not cached
+      - name: Download large file 1
         run: |
-          if [ ! -f data/kasandr.zip ]; then
-            echo "Downloading dataset..."
-            mkdir -p data
-            wget -O data/kasandr.zip https://archive.ics.uci.edu/static/public/385/kasandr.zip
+          mkdir -p data
+          if [ ! -f data/1GB.file1.bin ]; then
+            wget -O data/1GB.file1.bin https://ash-speed.hetzner.com/1GB.bin
           else
-            echo "Dataset already cached."
+            echo "data/1GB.file1.bin already cached."
+          fi
+
+      - name: Download large file 2
+        run: |
+          if [ ! -f data/1GB.file2.bin ]; then
+            wget -O data/1GB.file2.bin https://ash-speed.hetzner.com/1GB.bin
+          else
+            echo "data/1GB.file2.bin already cached."
+          fi
+
+      - name: Download large file 3
+        run: |
+          if [ ! -f data/1GB.file3.bin ]; then
+            wget -O data/1GB.file3.bin https://ash-speed.hetzner.com/1GB.bin
+          else
+            echo "data/1GB.file3.bin already cached."
           fi
 
       - name: List data directory
