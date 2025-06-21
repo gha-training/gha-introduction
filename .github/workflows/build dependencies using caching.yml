@@ -1,46 +1,40 @@
-name: Cached Dataset Download
+name: Cached workflow
 
 on:
   workflow_dispatch:
 
 jobs:
-  dataset-demo:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Restore data from cache
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Cache virtual environment
         uses: actions/cache@v4
         with:
-          path: data
-          key: ${{ runner.os }}-largefiles-cache
+          path: .venv
+          key: ${{ runner.os }}-venv-${{ hashFiles('dependencies/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-venv-
 
-      - name: Download large file 1
+      - name: Create and install (if needed)
         run: |
-          mkdir -p data
-          if [ ! -f data/1GB.file1.bin ]; then
-            wget -O data/1GB.file1.bin https://ash-speed.hetzner.com/1GB.bin
+          if [ ! -d ".venv" ]; then
+            python -m venv .venv
+            source .venv/bin/activate
+            pip install -r dependencies/requirements.txt
           else
-            echo "data/1GB.file1.bin already cached."
+            echo "Using cached virtual environment."
           fi
 
-      - name: Download large file 2
+      - name: Verify install
         run: |
-          if [ ! -f data/1GB.file2.bin ]; then
-            wget -O data/1GB.file2.bin https://ash-speed.hetzner.com/1GB.bin
-          else
-            echo "data/1GB.file2.bin already cached."
-          fi
-
-      - name: Download large file 3
-        run: |
-          if [ ! -f data/1GB.file3.bin ]; then
-            wget -O data/1GB.file3.bin https://ash-speed.hetzner.com/1GB.bin
-          else
-            echo "data/1GB.file3.bin already cached."
-          fi
-
-      - name: List data directory
-        run: ls -lh data
+          source .venv/bin/activate
+          python -c "import numpy; print(numpy.__version__)"
