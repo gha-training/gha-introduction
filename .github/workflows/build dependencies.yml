@@ -11,11 +11,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Download large file
+      - name: Download large file 1
         run: |
           mkdir -p data
-          echo "Downloading test file ..."
-          wget -O data/1GB.bin https://ash-speed.hetzner.com/1GB.bin
+          wget -O data/1GB.file1.bin https://ash-speed.hetzner.com/1GB.bin
+
+      - name: Download large file 2
+        run: wget -O data/1GB.file2.bin https://ash-speed.hetzner.com/1GB.bin
+
+      - name: Download large file 3
+        run: wget -O data/1GB.file3.bin https://ash-speed.hetzner.com/1GB.bin
 
       - name: List data directory
         run: ls -lh data
