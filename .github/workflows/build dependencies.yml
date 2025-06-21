@@ -15,7 +15,7 @@ jobs:
         run: |
           mkdir -p data
           echo "Downloading dataset..."
-          wget -O data/twitter+geospatial+data.zip https://archive.ics.uci.edu/static/public/1050/twitter+geospatial+data.zip
+          wget -O data/kasandr.zip https://archive.ics.uci.edu/static/public/385/kasandr.zip
 
       - name: List data directory
         run: ls -lh data
