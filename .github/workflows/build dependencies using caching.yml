@@ -1,33 +1,31 @@
-name: Build dependencies using caching
+name: Cached Dataset Download
 
 on:
   workflow_dispatch:
 
 jobs:
-  build:
+  dataset-demo:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Cache pip dependencies
+      - name: Restore dataset from cache
         uses: actions/cache@v4
         with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('dependencies/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
+          path: data
+          key: ${{ runner.os }}-kasandr-dataset
 
-      - name: Install dependencies
-        run: pip install -r dependencies/requirements.txt
+      - name: Download dataset if not cached
+        run: |
+          if [ ! -f data/kasandr.zip ]; then
+            echo "Downloading dataset..."
+            mkdir -p data
+            wget -O data/kasandr.zip https://archive.ics.uci.edu/static/public/385/kasandr.zip
+          else
+            echo "Dataset already cached."
+          fi
 
-      - name: Run mathlib.py
-        run: python python/mathlib.py
-
-      - name: Run tests
-        run: python python/test_mathlib.py
+      - name: List data directory
+        run: ls -lh data
