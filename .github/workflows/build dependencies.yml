@@ -1,26 +1,21 @@
-name: Build dependencies
+name: Inefficient Dataset Download
 
 on:
   workflow_dispatch:
 
 jobs:
-  build:
+  dataset-demo:
     runs-on: ubuntu-latest
+
     steps:
-    
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-      
-      - name: Install dependencies
-        run: pip install -r dependencies/requirements.txt
-      
-      - name: Run mathlib.py
-        run: python python/mathlib.py
-        
-      - name: Run tests
-        run: python python/test_mathlib.py
+      - name: Always download dataset
+        run: |
+          mkdir -p data
+          echo "Downloading dataset..."
+          wget -O data/AirQualityUCI.zip https://archive.ics.uci.edu/ml/machine-learning-databases/00360/AirQualityUCI.zip
+
+      - name: List data directory
+        run: ls -lh data
