@@ -20,7 +20,7 @@ jobs:
         run: |
           python -m venv .venv
           source .venv/bin/activate
-          pip install -r dependencies/requirements.txt
+          pip install -r venv/requirements.txt
 
       - name: Verify install
         run: |
