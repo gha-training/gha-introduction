@@ -11,11 +11,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Always download dataset
+      - name: Download large file
         run: |
           mkdir -p data
-          echo "Downloading dataset..."
-          wget -O data/kasandr.zip https://archive.ics.uci.edu/static/public/385/kasandr.zip
+          echo "Downloading test file ..."
+          wget -O data/1GB.bin https://ash-speed.hetzner.com/1GB.bin
 
       - name: List data directory
         run: ls -lh data
