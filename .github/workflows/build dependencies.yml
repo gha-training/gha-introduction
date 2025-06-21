@@ -15,7 +15,7 @@ jobs:
         run: |
           mkdir -p data
           echo "Downloading dataset..."
-          wget -O data/AirQualityUCI.zip https://archive.ics.uci.edu/ml/machine-learning-databases/00360/AirQualityUCI.zip
+          wget -O data/twitter+geospatial+data.zip https://archive.ics.uci.edu/static/public/1050/twitter+geospatial+data.zip
 
       - name: List data directory
         run: ls -lh data
