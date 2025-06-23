@@ -2,6 +2,9 @@ name: Deploy to Cloudflare Pages
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - 'javascript/**'
 
 jobs:
   deploy:
@@ -10,6 +13,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Run mathlib tests
+        run: node javascript/test_mathlib.js
 
       - name: Install Wrangler
         run: npm install -g wrangler
