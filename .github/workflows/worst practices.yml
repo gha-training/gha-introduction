@@ -1,0 +1,46 @@
+name: workflow
+
+on: [push, pull_request, workflow_dispatch, schedule] 
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: do stuff
+        run: |
+          echo "Building..."
+          echo "Testing..."
+          echo "Deploying..."
+          # All tasks bundled in one job — not modular
+          sleep 10
+          exit 1  # Will fail, but no fail-fast or clear feedback
+
+      - name: Use secret
+        run: echo "Using secret ${{ secrets.SUPER_SECRET }}"
+
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: duplicate work
+        run: |
+          echo "Building..."
+          echo "Testing..."
+          echo "Deploying..."
+          sleep 10
+
+  job3:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: hard-coded variant
+        run: echo "Running on Windows manually instead of matrix"
+
+  job4:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: install
+        run: npm install
