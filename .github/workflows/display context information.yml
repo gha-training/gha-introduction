@@ -1,0 +1,62 @@
+name: Display context information
+
+on:
+  workflow_dispatch:
+
+jobs:
+  show-context:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Show GitHub context
+        run: |
+          echo "GitHub Event: ${{ github.event_name }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Repository Owner: ${{ github.repository_owner }}"
+          echo "Ref: ${{ github.ref }}"
+          echo "SHA: ${{ github.sha }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Workflow: ${{ github.workflow }}"
+          echo "Run ID: ${{ github.run_id }}"
+          echo "Run Number: ${{ github.run_number }}"
+          echo "Job: ${{ github.job }}"
+          echo "Server URL: ${{ github.server_url }}"
+          echo "API URL: ${{ github.api_url }}"
+          echo "GraphQL URL: ${{ github.graphql_url }}"
+          echo "Head Ref: ${{ github.head_ref }}"
+          echo "Base Ref: ${{ github.base_ref }}"
+          echo "Workspace: ${{ github.workspace }}"
+          echo "Event Path: ${{ github.event_path }}"
+          echo "Event Payload: ${{ toJson(github.event) }}"
+
+      - name: Show Runner context
+        run: |
+          echo "Runner OS: ${{ runner.os }}"
+          echo "Runner Arch: ${{ runner.arch }}"
+          echo "Runner Name: ${{ runner.name }}"
+          echo "Temporary Directory: ${{ runner.temp }}"
+          echo "Tool Cache: ${{ runner.tool_cache }}"
+
+      - name: Show Job context
+        run: |
+          echo "Job Status: ${{ job.status }}"
+
+      - name: Show Strategy context
+        run: |
+          echo "Strategy Job Index: ${{ strategy.job-index }}"
+
+      - name: Show Matrix context
+        run: |
+          echo "Matrix OS: ${{ matrix.os }}"
+
+      # Example placeholder for inputs and needs — these won't have values unless configured
+      - name: Show Inputs / Needs context
+        run: |
+          echo "Input (if defined): ${{ inputs.some_input }}"
+          echo "Needs (if defined): ${{ needs.some_job.outputs.some_value }}"
