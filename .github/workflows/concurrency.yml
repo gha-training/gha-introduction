@@ -1,0 +1,21 @@
+name: Concurrency
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Simulate long task
+        run: |
+          echo "Starting long task..."
+          sleep 60
+          echo "Task complete."
