@@ -8,7 +8,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest]
 
     steps:
       - name: Checkout code
@@ -31,7 +31,9 @@ jobs:
           echo "GraphQL URL: ${{ github.graphql_url }}"
           echo "Head Ref: ${{ github.head_ref }}"
           echo "Base Ref: ${{ github.base_ref }}"
+          echo "Workspace: ${{ github.workspace }}"
           echo "Event Path: ${{ github.event_path }}"
+          echo "Event Payload: ${{ toJson(github.event) }}"
 
       - name: Show Runner context
         run: |
