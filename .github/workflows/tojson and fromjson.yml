@@ -1,0 +1,26 @@
+name: toJSON and fromJSON
+
+on:
+  workflow_dispatch:
+
+jobs:
+  demo-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create a variable and convert it to JSON
+        id: make_json
+        run: |
+          # Set a plain string
+          echo "MY_NAME=Richard" >> $GITHUB_ENV
+
+      - name: Use toJSON to convert env var to JSON string
+        run: |
+          JSON_NAME='${{ toJSON(env.MY_NAME) }}'
+          echo "JSON_NAME=$JSON_NAME"
+          echo "JSON_NAME=$JSON_NAME" >> $GITHUB_ENV
+
+      - name: Parse JSON string back using fromJSON
+        run: |
+          PARSED_NAME='${{ fromJSON(env.JSON_NAME) }}'
+          echo "Parsed name: $PARSED_NAME"
