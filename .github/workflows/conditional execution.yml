@@ -31,13 +31,13 @@ jobs:
         if: matrix.python-version == '3.12.0'
         run: echo "Running extra step for Python 3.12.0"
 
-      - name: Introduce failure
-        run: exit 1
+#     - name: Introduce failure
+#       run: exit 1
 
-      - name: This runs on failure
-        if: failure()
-        run: echo "The previous step failed, so this step is running."
+#     - name: This runs on failure
+#       if: failure()
+#       run: echo "The previous step failed, so this step is running."
 
-      - name: This always runs
-        if: always()
-        run: echo "This step runs regardless of previous step outcome."
+#     - name: This always runs
+#       if: always()
+#       run: echo "This step runs regardless of previous step outcome."
